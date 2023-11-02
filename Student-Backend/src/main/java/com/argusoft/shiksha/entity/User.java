@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="user")
+@Table(name="_user")
 public class User {
 
 
@@ -35,6 +35,7 @@ public class User {
     @Column(name = "dob")
     @Temporal(TemporalType.DATE)
     private Date dob;
+
 
     public User() {
     }
@@ -127,6 +128,8 @@ public class User {
                 ", dob=" + dob +
                 '}';
     }
+
+
 }
 
 

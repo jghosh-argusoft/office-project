@@ -2,12 +2,13 @@ package com.argusoft.shiksha.service;
 
 import com.argusoft.shiksha.entity.User;
 
+import java.util.List;
 
 public interface UserService {
+    List<User> getAllUsers();
 
-//    List<User> findAll();
+    User getUserByUsername(String username);
 
-    User findById(int theId);
+    User createUser(User user);
 
-    void save(User theUser);
 }

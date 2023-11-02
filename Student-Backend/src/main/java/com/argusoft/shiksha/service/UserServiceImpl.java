@@ -1,12 +1,11 @@
 package com.argusoft.shiksha.service;
 
-import com.argusoft.shiksha.dao.UserRepository;
 import com.argusoft.shiksha.entity.User;
+import com.argusoft.shiksha.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -18,25 +17,19 @@ public class UserServiceImpl implements UserService{
         userRepository=theUserRepository;
     }
 
-
     @Override
-    public User findById(int theId) {
-        Optional<User> result=userRepository.findById(theId);
-
-        User user=null;
-
-        if(result.isPresent()){
-            user=result.get();
-        }
-        else {
-            throw new RuntimeException("Did not find the user - "+theId);
-        }
-
-        return user;
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    public void save(User user){
-        userRepository.save(user);
+    @Override
+    public User createUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
 

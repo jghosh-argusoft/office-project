@@ -10,16 +10,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserListService } from './user-list.service';
+import { HttpClientModule } from '@angular/common/http';
 
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { ReCaptchaV3Service } from 'ngx-captcha';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    LoginComponent,
     HomeComponent,
     SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -27,8 +31,12 @@ import { UserListService } from './user-list.service';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    HttpClientModule,
+    RecaptchaModule,
+    NgxCaptchaModule,
+    RecaptchaFormsModule,
   ],
-  providers: [UserListService],
+  providers: [UserListService,ReCaptchaV3Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,23 +1,25 @@
-import { Injectable } from "@angular/core";
-import { User } from "./shared/user.model";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from './shared/user.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class UserListService {
+  private baseUrl: string = 'http://localhost:8080/api/users';
+ 
+  constructor(private http: HttpClient) {}
 
-  private users: User[] = [
-    new User('Janmejay', 'Ghosh', 'jghosh@argusoft.com', 'jghosh', '123'),
-    new User('Parth', 'Tanna', 'ptanna@argusoft.com', 'patnna', '123')
-  ];
-
-  getUsers() {
-    return this.users.slice();
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/`);
   }
 
-  addUser(user: User) {
-    this.users.push(user);
+  getUserByUsername(username: string): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/${username}`);
   }
 
-  getUserByUsername(username: string): User | undefined {
-    return this.users.find(user => user.username === username);
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/`, user);
   }
 }
