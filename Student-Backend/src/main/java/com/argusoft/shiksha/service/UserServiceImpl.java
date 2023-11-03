@@ -11,6 +11,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     private UserRepository userRepository;
+    //For mail service
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     @Autowired
     public UserServiceImpl(UserRepository theUserRepository){
@@ -24,7 +27,34 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User createUser(User user) {
-        return userRepository.save(user);
+        if(user.getVerificationCode()==null){
+            String verificationCode = generateRandomVerificationCode();
+            user.setVerificationCode(verificationCode);
+        }
+
+        User newCreatedUser =userRepository.save(user);
+        sendVerificationCodeByEmail(newCreatedUser.getEmail(),newCreatedUser.getVerificationCode());
+
+        return newCreatedUser;
+    }
+
+    private void sendVerificationCodeByEmail(String email, String verificationCode) {
+        String subject="Account Verification Code";
+        String body="Your verification code is: "+verificationCode;
+
+        emailSenderService.sendEmail(email,subject,body);
+    }
+
+    private String generateRandomVerificationCode(){
+        String characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder code =new StringBuilder();
+        int codeLength=12;
+
+        for(int i=0;i<codeLength;i++){
+            int index=(int)(Math.random()*characters.length());
+            code.append(characters.charAt(index));
+        }
+        return code.toString();
     }
 
     @Override

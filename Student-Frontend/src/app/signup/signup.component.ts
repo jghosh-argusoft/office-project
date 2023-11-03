@@ -1,8 +1,8 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserListService } from '../user-list.service'; 
 import { Router } from '@angular/router';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { RecaptchaErrorParameters } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-signup',
@@ -10,9 +10,26 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent{
-  signupForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: UserListService,private router: Router,private reCaptchaV3Service: ReCaptchaV3Service,private el: ElementRef, private renderer: Renderer2) {
+
+  signupForm: FormGroup;
+  aFormGroup: FormGroup;
+  captchaKey:string="6LcBo-8oAAAAAPv7JyKhfrPajZVOvhP68wOAPf5_"
+  captchaCompleted:Boolean=false;
+
+  public captchaIsLoaded=false;
+  public captchaSuccess=false;
+  public captchaIsExpired=false;
+  public captchaResponse?:string;
+
+  // public theme: 'light' | 'dark' = 'light';
+  // public size: 'compact' | 'normal' = 'normal';
+  // public lang = 'en';
+  // public type: 'image' | 'audio'; 
+
+
+
+  constructor(private fb: FormBuilder,private formBuilder: FormBuilder, private userService: UserListService,private router: Router,private el: ElementRef, private renderer: Renderer2) {
     this.signupForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -22,14 +39,21 @@ export class SignupComponent{
       dob: ['', Validators.required],
       gender: [''] 
     });
-    // this.aFormGroup = this.fb.group({
-    //   recaptcha: ['', Validators.required], 
-    // });
-    
 
-    // this.captcha='';
-    
+    this.aFormGroup=this.formBuilder.group({
+       recaptcha:['',Validators.required]
+     })
+
+   
   }
+
+  
+  // ngOnInit(): void {
+  //   this.aFormGroup=this.formBuilder.group({
+  //     recaptcha:['',Validators.required]
+  //   })
+  // }
+
 
   onSubmit() {
     if (this.signupForm.valid) {
@@ -48,10 +72,9 @@ export class SignupComponent{
     
   }
 
-
-
-  // resolve(captchaResponse: string){
-  //   this.captcha=captchaResponse;
-  //   console.log('resolved captcha with responses:'+this.captcha);
-  // }
+  onCaptchaResolved(captchaResponse: any): void {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    this.captchaCompleted = true; 
+  }
+  
 }

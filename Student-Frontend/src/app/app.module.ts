@@ -11,10 +11,13 @@ import { SignupComponent } from './signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserListService } from './user-list.service';
 import { HttpClientModule } from '@angular/common/http';
-
-import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { NgxCaptchaModule } from 'ngx-captcha';
-import { ReCaptchaV3Service } from 'ngx-captcha';
+import { VerifyComponent } from './signup/verify/verify.component';
+
+// import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module,RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+// import { NgxCaptchaModule } from 'ngx-captcha';
+// import { ReCaptchaV3Service } from 'ngx-captcha';
+// import { environment } from './environment';
 
 
 @NgModule({
@@ -23,7 +26,8 @@ import { ReCaptchaV3Service } from 'ngx-captcha';
     NavComponent,
     HomeComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
@@ -32,11 +36,10 @@ import { ReCaptchaV3Service } from 'ngx-captcha';
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
-    RecaptchaModule,
-    NgxCaptchaModule,
-    RecaptchaFormsModule,
+    NgxCaptchaModule
+
   ],
-  providers: [UserListService,ReCaptchaV3Service],
+  providers: [UserListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

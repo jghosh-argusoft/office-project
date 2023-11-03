@@ -29,18 +29,23 @@ public class User {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "password")
+
+    @Column(name = "password",updatable = false)
     private String password;
 
     @Column(name = "dob")
     @Temporal(TemporalType.DATE)
     private Date dob;
 
+    @Column(name = "verification_code")
+    private String verificationCode;
+
+
 
     public User() {
     }
 
-    public User(int user_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob) {
+    public User(int user_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob, String verificationCode) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
@@ -49,6 +54,16 @@ public class User {
         this.gender = gender;
         this.password = password;
         this.dob = dob;
+        this.verificationCode = verificationCode;
+    }
+
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     public int getUser_id() {
@@ -126,10 +141,9 @@ public class User {
                 ", gender='" + gender + '\'' +
                 ", password='" + password + '\'' +
                 ", dob=" + dob +
+                ", verificationCode='" + verificationCode + '\'' +
                 '}';
     }
-
-
 }
 
 

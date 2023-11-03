@@ -50,8 +50,17 @@
             <label for="other" class="form-check-label">Other</label>
           </div>
         </div>
-        <div class="g-recaptcha" data-sitekey="6Ld4VOwoAAAAAHPLBc7j2MdcVJ8TU6F8HaRV4xbE"></div>
-        <button type="submit" [disabled]="!signupForm.valid " class="btn btn-primary">Sign Up</button>
+
+
+        <form [formGroup]="aFormGroup">
+          <ngx-recaptcha2 #captchaElem
+          [siteKey]="captchaKey"
+          formControlName="recaptcha"
+          (resolve)="onCaptchaResolved($event)"></ngx-recaptcha2>
+        </form>
+
+        <button type="submit" [disabled]="!signupForm.valid || captchaCompleted" class="btn btn-primary" (click)="openVerificationModal()>Sign Up</button>
+
       </form>
     </div>
   </div>
