@@ -52,5 +52,22 @@ public class UserController {
 //    }
 //
 
+    @PutMapping("/{username}/verify")
+    public ResponseEntity<String> verifyUserAccount(@PathVariable String username, @RequestParam String verificationCode){
+        User user =userService.getUserByUsername(username);
+
+        if (user.getVerificationCode().equals(verificationCode)) {
+            user.setVerified(true);
+            userService.updateUser(user);
+            return ResponseEntity.ok("User email isverified");
+        }
+        else {
+            return ResponseEntity.badRequest().body("Invalid verification code. Please try again.");
+        }
+    }
+
+
+
+
 
 }

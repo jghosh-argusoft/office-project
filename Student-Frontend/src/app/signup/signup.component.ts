@@ -48,11 +48,11 @@ export class SignupComponent{
   }
 
   
-  // ngOnInit(): void {
-  //   this.aFormGroup=this.formBuilder.group({
-  //     recaptcha:['',Validators.required]
-  //   })
-  // }
+  ngOnInit(): void {
+    this.aFormGroup=this.formBuilder.group({
+      recaptcha:['',Validators.required]
+    })
+  }
 
 
   onSubmit() {
@@ -62,7 +62,7 @@ export class SignupComponent{
       this.userService.createUser(user).subscribe(
         (response) => {
           console.log('User created:', response);
-          this.router.navigate(['/login'])
+          this.router.navigate(['verify'])
         },
         (error) => {
           console.error('User creation failed:', error);
@@ -73,7 +73,7 @@ export class SignupComponent{
   }
 
   onCaptchaResolved(captchaResponse: any): void {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    // console.log(`Resolved captcha with response: ${captchaResponse}`);
     this.captchaCompleted = true; 
   }
   

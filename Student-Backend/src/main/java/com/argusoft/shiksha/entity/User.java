@@ -40,12 +40,17 @@ public class User {
     @Column(name = "verification_code")
     private String verificationCode;
 
+    @Column(name = "is_verified")
+    private boolean verified;
+
+
+
 
 
     public User() {
     }
 
-    public User(int user_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob, String verificationCode) {
+    public User(int user_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob, String verificationCode,boolean verified) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
@@ -55,7 +60,17 @@ public class User {
         this.password = password;
         this.dob = dob;
         this.verificationCode = verificationCode;
+        this.verified=verified;
     }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+
 
 
     public String getVerificationCode() {
@@ -142,6 +157,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", dob=" + dob +
                 ", verificationCode='" + verificationCode + '\'' +
+                ", verified=" + verified +
                 '}';
     }
 }

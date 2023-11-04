@@ -1,14 +1,13 @@
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#verificationModal">
-    Verify Email and Update Password
+    Verify Email
   </button>
   
-  <!-- The Modal -->
   <div class="modal fade" id="verificationModal" tabindex="-1" role="dialog" aria-labelledby="verificationModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="verificationModalLabel">Verification and Password Update</h5>
+          <h5 class="modal-title" id="verificationModalLabel">Verification</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -17,20 +16,18 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="verificationCode">Verification Code:</label>
-            <input type="text" class="form-control" id="verificationCode">
+            <input type="text" class="form-control" id="verificationCode" #verificationCodeInput>
           </div>
- 
-          <div class="form-group">
-            <label for="newPassword">New Password:</label>
-            <input type="password" class="form-control" id="newPassword">
-          </div>
-        </div>
+          <div class="alert alert-danger" role="alert" *ngIf="verificationError">{{verificationError}}</div>
+
+        </div> 
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="submitVerificationAndNewPassword()">Submit</button>
+          <button type="button" class="btn btn-primary" onclick="submitVerification(verificationCodeInput.value)">Submit</button>
         </div>
       </div>
     </div>
   </div>
   
+

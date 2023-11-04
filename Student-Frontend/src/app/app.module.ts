@@ -7,17 +7,19 @@ import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SignupComponent } from './signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserListService } from './user-list.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxCaptchaModule } from 'ngx-captcha';
-import { VerifyComponent } from './signup/verify/verify.component';
+
 
 // import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module,RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 // import { NgxCaptchaModule } from 'ngx-captcha';
 // import { ReCaptchaV3Service } from 'ngx-captcha';
 // import { environment } from './environment';
+import { SignupComponent } from './signup/signup.component';
+import { VerifyComponent } from './verify/verify.component';
+
 
 
 @NgModule({
@@ -25,9 +27,10 @@ import { VerifyComponent } from './signup/verify/verify.component';
     AppComponent,
     NavComponent,
     HomeComponent,
-    SignupComponent,
     LoginComponent,
+    SignupComponent,
     VerifyComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { VerifyComponent } from './signup/verify/verify.component';
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    ReactiveFormsModule,
 
   ],
   providers: [UserListService],
