@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -40,6 +42,49 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
+
+    @PutMapping("/{username}/verify")
+    public ResponseEntity<String> verifyUserAccount(@PathVariable String username) {
+        User user = userService.getUserByUsername(username);
+
+        if (user != null && user.getVerificationCode() != null) {
+            user.setVerified(true);
+            userService.updateUser(user);
+            return ResponseEntity.ok("User email is verified");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid verification code. Please try again.");
+        }
+    }
+
+    //TOOK REFERNCE FROM CHATGPT and got that the inputo fronend must be in json
+    @GetMapping("/{username}/verificationCode")
+    public ResponseEntity<Map<String, String>> getVerificationCode(@PathVariable String username) {
+        User user = userService.getUserByUsername(username);
+        if (user != null) {
+            Map<String, String> response = new HashMap<>();
+            response.put("verificationCode", user.getVerificationCode());
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.notFound().build(); // Return a 404 response if user is not found
+        }
+    }
+
+
+//    @GetMapping("/{username}/verificationCode")
+//    public String getVerificationCode(@PathVariable String username){
+//        User user =userService.getUserByUsername(username);
+//        if(user!=null){
+//
+//                return user.getVerificationCode();
+//        }
+//        else{
+//            return "User not found";
+//        }
+//    }
+//}
+    //above working but i string output
+
+
 //    @PostMapping("/")
 //    public ResponseEntity<User> createUser(@RequestBody User user) {
 //        User createdUser = userService.createUser(user);
@@ -51,23 +96,5 @@ public class UserController {
 //        return ResponseEntity.created(location).body(createdUser);
 //    }
 //
-
-    @PutMapping("/{username}/verify")
-    public ResponseEntity<String> verifyUserAccount(@PathVariable String username, @RequestParam String verificationCode){
-        User user =userService.getUserByUsername(username);
-
-        if (user.getVerificationCode().equals(verificationCode)) {
-            user.setVerified(true);
-            userService.updateUser(user);
-            return ResponseEntity.ok("User email isverified");
-        }
-        else {
-            return ResponseEntity.badRequest().body("Invalid verification code. Please try again.");
-        }
-    }
-
-
-
-
 
 }

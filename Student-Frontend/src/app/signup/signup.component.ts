@@ -62,7 +62,7 @@ export class SignupComponent{
       this.userService.createUser(user).subscribe(
         (response) => {
           console.log('User created:', response);
-          this.router.navigate(['verify'])
+          this.router.navigate(['verify'],{queryParams:{username:user.username}})
         },
         (error) => {
           console.error('User creation failed:', error);

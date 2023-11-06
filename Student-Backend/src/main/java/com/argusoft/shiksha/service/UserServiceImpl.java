@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserService{
     private void sendVerificationCodeByEmail(String email, String verificationCode) {
         String subject="Account Verification Code";
         String body="Your verification code is: "+verificationCode;
-
         emailSenderService.sendEmail(email,subject,body);
     }
 
@@ -61,6 +60,8 @@ public class UserServiceImpl implements UserService{
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+
 
     @Override
     public void updateUser(User user) {

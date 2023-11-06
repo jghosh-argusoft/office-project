@@ -41,7 +41,7 @@ public class User {
     private String verificationCode;
 
     @Column(name = "is_verified")
-    private boolean verified;
+    private boolean verified=false;
 
 
 

@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserListService } from '../user-list.service';
+import { Observable } from 'rxjs'; // Import the Observable class
 
 @Component({
   selector: 'app-verify',
@@ -8,32 +9,58 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./verify.component.css']
 })
 export class VerifyComponent {
-  verificationCode: string;
-  verificationError: string;
-  username: string; 
+  verificationCode: string = '';
+  verificationError: string = '';
+  username: string = '';
 
-
-  
-  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient, private router: Router) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private userListService: UserListService,
+    private router: Router
+  ) {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.verificationCode = params['code'];
-      this.username = params['username']; 
-      this.verifyUserAccount(this.verificationCode, this.username);
+      this.username = params['username'];
+      console.log("the username is  " + this.username);
     });
   }
 
+  verifyUserAccount(verificationCodeInput: HTMLInputElement): void {
+    const username = this.username;
+    const verificationCode = verificationCodeInput.value;
 
-  verifyUserAccount(verificationCode: string, username: string): void {
-    this.http.put<any>(`http://localhost:8080/api/users/${username}/verify`, { verificationCode }).subscribe(
-      response => {
-        console.log('User account verified:', response);
-        this.router.navigate(['/login']);
+
+   
+    this.userListService.getVerificationCode(username).subscribe(
+      (response: { verificationCode: string }) => {
+
+        if (response && response.verificationCode) {
+          console.log('Verification code retrieved:', response.verificationCode);
+          alert("user verified")
+          this.router.navigate(['login'])
+        } else {
+          console.error('Verification code not found in the response.');
+        }
       },
-      error => {
-        this.verificationError = 'Invalid verification code. Please try again.';
-        console.error('User account verification failed:', error);
+      (error) => {
+        console.error('Error fetching verification code:', error);
+
+        if (error.error) {
+          console.error('Detailed error:', error.error);
+        }
       }
     );
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+ //NOTE   the output from backend must output in json not in string (chekc if the output is like json or string)...........
