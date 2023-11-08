@@ -37,20 +37,20 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date dob;
 
+    @Column(name = "user_role")
+    private String userRole;
+
     @Column(name = "verification_code")
     private String verificationCode;
 
     @Column(name = "is_verified")
     private boolean verified=false;
-
-
-
-
+//========================================================================
 
     public User() {
     }
 
-    public User(int user_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob, String verificationCode,boolean verified) {
+    public User(int user_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob, String userRole, String verificationCode, boolean verified) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
@@ -59,8 +59,18 @@ public class User {
         this.gender = gender;
         this.password = password;
         this.dob = dob;
+        this.userRole = userRole;
         this.verificationCode = verificationCode;
-        this.verified=verified;
+        this.verified = verified;
+    }
+
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 
     public boolean isVerified() {
@@ -156,6 +166,7 @@ public class User {
                 ", gender='" + gender + '\'' +
                 ", password='" + password + '\'' +
                 ", dob=" + dob +
+                ", userRole='" + userRole + '\'' +
                 ", verificationCode='" + verificationCode + '\'' +
                 ", verified=" + verified +
                 '}';

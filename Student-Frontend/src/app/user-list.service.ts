@@ -23,13 +23,10 @@ export class UserListService {
     return this.http.post<User>(`${this.baseUrl}/`, user);
   }
 
-
-  
   getVerificationCode(username: string): Observable<any> {
-
-
+    
     const encodedUsername = encodeURIComponent(username);
-    return this.http.get<any>(`http://localhost:8080/api/users/${encodedUsername}/verificationCode`);
+    return this.http.get<any>(`${this.baseUrl}/${encodedUsername}/verificationCode`);
 //     If the username contains special characters like @, it needs to be properly URL-encoded to ensure it is interpreted correctly by the server.
 // You can use encodeURIComponent to encode the username before appending it to the URL. Modify your code like this:
   }
@@ -39,4 +36,6 @@ export class UserListService {
     const requestBody = {};
     return this.http.put<User>(`${this.baseUrl}/${username}/verify`, requestBody);
   }
+
+
 }

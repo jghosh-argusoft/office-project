@@ -1,6 +1,7 @@
 package com.argusoft.shiksha.controller;
 
 import com.argusoft.shiksha.entity.User;
+import com.argusoft.shiksha.entity.UserRole;
 import com.argusoft.shiksha.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,20 +44,9 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @PutMapping("/{username}/verify")
-    public ResponseEntity<String> verifyUserAccount(@PathVariable String username) {
-        User user = userService.getUserByUsername(username);
 
-        if (user != null && user.getVerificationCode() != null) {
-            user.setVerified(true);
-            userService.updateUser(user);
-            return ResponseEntity.ok("User email is verified");
-        } else {
-            return ResponseEntity.badRequest().body("Invalid verification code. Please try again.");
-        }
-    }
 
-    //TOOK REFERNCE FROM CHATGPT and got that the inputo fronend must be in json
+    //TOOK REFERNCE FROM CHATGPT and got that the input fronend must be in json
     @GetMapping("/{username}/verificationCode")
     public ResponseEntity<Map<String, String>> getVerificationCode(@PathVariable String username) {
         User user = userService.getUserByUsername(username);
@@ -69,6 +59,35 @@ public class UserController {
         }
     }
 
+    @PutMapping("/{username}/verify")
+    public ResponseEntity<String> verifyUserAccount(@PathVariable String username) {
+        User user = userService.getUserByUsername(username);
+
+        System.out.println(".....Entered verifyUserAccount........");
+
+        if (user != null && user.getVerificationCode() != null) {
+
+
+            System.out.println(".....Entered if........");
+
+
+            user.setVerified(true);
+            userService.updateUser(user);
+            return ResponseEntity.ok("User email is verified");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid verification code. Please try again.");
+        }
+    }
+
+    @PostMapping("/createRole")
+    public UserRole createUserRole(@RequestBody UserRole userRole) {
+        return userService.createUserRole(userRole);
+    }
+
+    @GetMapping("/getRoles")
+    public List<UserRole> getAllUserRoles() {
+        return userService.getAllUserRoles();
+    }
 
 //    @GetMapping("/{username}/verificationCode")
 //    public String getVerificationCode(@PathVariable String username){

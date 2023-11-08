@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserListService } from '../user-list.service'; 
 import { Router } from '@angular/router';
-import { RecaptchaErrorParameters } from 'ng-recaptcha';
+// import { RecaptchaErrorParameters } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +10,6 @@ import { RecaptchaErrorParameters } from 'ng-recaptcha';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent{
-
 
   signupForm: FormGroup;
   aFormGroup: FormGroup;
@@ -44,7 +43,6 @@ export class SignupComponent{
        recaptcha:['',Validators.required]
      })
 
-   
   }
 
   
