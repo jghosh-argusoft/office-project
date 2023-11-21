@@ -15,7 +15,7 @@ export class UserListService {
     return this.http.get<User[]>(`${this.baseUrl}/`);
   }
 
-  getUserByUsername(username: string): Observable<User> {
+  getUserByUsername(username: String): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/${username}`);
   }
 
@@ -25,6 +25,7 @@ export class UserListService {
 
   getVerificationCode(username: string): Observable<any> {
     
+    //below is to send th username conversion in URI
     const encodedUsername = encodeURIComponent(username);
     return this.http.get<any>(`${this.baseUrl}/${encodedUsername}/verificationCode`);
 //     If the username contains special characters like @, it needs to be properly URL-encoded to ensure it is interpreted correctly by the server.
@@ -39,3 +40,5 @@ export class UserListService {
 
 
 }
+
+

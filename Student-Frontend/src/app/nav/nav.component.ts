@@ -15,9 +15,9 @@ export class NavComponent {
  
 
   navigationItems:{text:String,route:String}[]=[
-    {text:"home",route:"/home"},
-    {text:"dashboard",route:"/dashboard"},
-    {text:"logout",route:"/logout"},
+    {text:"Home",route:"/home"},
+    {text:"Dashboard",route:"/dashboard"},
+    {text:"Logout",route:"/logout"},
    ]
 
    isLoggedIn(){

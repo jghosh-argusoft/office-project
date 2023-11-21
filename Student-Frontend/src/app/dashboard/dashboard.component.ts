@@ -8,12 +8,7 @@ import { UserListService } from '../user-list.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-approveUser() {
-throw new Error('Method not implemented.');
-}
-rejectUser() {
-throw new Error('Method not implemented.');
-}
+
   users: User[] = [];
 
   constructor(private userListService: UserListService) {}

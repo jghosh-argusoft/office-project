@@ -9,3 +9,12 @@
     background: rgb(255,255,255);
 background: linear-gradient(180deg, rgba(255,255,255,1) 2%, rgba(149,255,254,1) 100%);
 } */
+*{
+    padding: 0px;margin: 0px;
+}
+.upper-div{
+    height: 200px; 
+    width: 100%;border-radius: 4px;margin-top: 50px;
+    background: rgb(255, 248, 152);
+    background: linear-gradient(180deg, rgba(194, 255, 255, 0) 0%, rgb(255, 248, 152) 100%);
+}

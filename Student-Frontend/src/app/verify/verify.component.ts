@@ -48,7 +48,6 @@ export class VerifyComponent {
 
 
           console.log('Verification code retrieved:', response.verificationCode);
-          alert("user verified, please login")
           
          
           this.router.navigate(['login'])

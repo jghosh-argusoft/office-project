@@ -23,9 +23,10 @@ export class LoginComponent {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.loginForm.reset();
   }
   ngOnInit(){
-    this.loginForm.reset();
+
     this.loginFailed=false;
   }
 
@@ -37,7 +38,6 @@ export class LoginComponent {
       this.userListService.getUserByUsername(username).subscribe(
         (user) => {
           if (user && user.password === password) {
-            alert("Hello 47")
             this.SharedData.setLoginStatus(true)
             this.router.navigate(['/home'],{queryParams:{username:user.username}});
           } else {

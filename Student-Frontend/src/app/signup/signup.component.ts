@@ -42,7 +42,6 @@ export class SignupComponent{
     this.aFormGroup=this.formBuilder.group({
        recaptcha:['',Validators.required]
      })
-
   }
 
   

@@ -25,7 +25,7 @@ import { VerifyComponent } from './verify/verify.component';
 import { LogoutComponent } from './logout/logout.component';
 import { DashboardComponent} from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
-import { StudentComponent } from './student/student.component';
+import { StudentFormComponent } from './student-form/student-form.component';
 
 
 
@@ -39,7 +39,8 @@ import { StudentComponent } from './student/student.component';
     VerifyComponent,
     LogoutComponent,
     DashboardComponent,
-    StudentComponent
+    StudentFormComponent
+
 
   ],
   imports: [
@@ -51,7 +52,8 @@ import { StudentComponent } from './student/student.component';
     HttpClientModule,
     NgxCaptchaModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgbModule
 
   ],
   providers: [UserListService],

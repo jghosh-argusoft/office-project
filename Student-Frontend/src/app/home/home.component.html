@@ -1,49 +1,32 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-12">
-      <div class="upper-div bg-dark text-light">
-        <h3>{{ username }}</h3>
+    <div>
+      <div class="upper-div text-light p-3">
+        <h1
+          style="
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-transform: uppercase;
+            color: black;
+            margin-left: 30%;
+            margin-top: 20px;
+            font-weight: bold;
+          "
+        >
+          Welcome {{ username }}
+        </h1>
       </div>
     </div>
   </div>
-
-  <div class="row mt-4 mb-4 d-flex">
-    <div class="col-3"></div>
-    <div class="col-3">
-      <div class="lower-div">
-        <div class="lower-div-left">
-          <div class="card" style="width: 18rem">
-            <img src="src/assets/images/stud.png" class="card-img-top" alt="student pic" />
-            <div class="card-body">
-              <h5 class="card-title">For Students</h5>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod,
-                totam?
-              </p>
-              <a routerLink="/student" class="btn btn-primary d-flex justify-content-center">Enroll as Student</a>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- .................................... -->
+  <div class="row mt-5 border">
+    <div class="col-4 border">
+      <button class="btn btn-primary p-1" (click)="toStudentFormCompo()">
+        Enroll as Student
+      </button>
     </div>
 
-    <div class="col-3">
-      <div class="lower-div" style="">
-        <div class="lower-div-right">
-          <div class="card" style="width: 18rem">
-            <img src="src/assets/images/teach.png" class="card-img-top" alt="student pic" />
-            <div class="card-body">
-              <h5 class="card-title">For Teachers</h5>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Temporibus, neque!
-              </p>
-              <a routerLink="/teacher" class="btn btn-primary d-flex justify-content-center">Enroll as Teacher</a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="col-4 border">
+      <button class="btn btn-primary p-1">Enroll as Teacher</button>
     </div>
-    <div class="col-3"></div>
   </div>
 </div>

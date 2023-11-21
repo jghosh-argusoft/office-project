@@ -36,6 +36,8 @@ public class Student {
     @Temporal(TemporalType.DATE)
     private Date studentDob;
 
+    //ADDITIONAL STUDENT ONLY FIELDS
+
 
     public Student() {
     }
