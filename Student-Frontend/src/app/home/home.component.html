@@ -2,31 +2,46 @@
   <div class="row">
     <div>
       <div class="upper-div text-light p-3">
-        <h1
-          style="
+        <h1 style="
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-transform: uppercase;
             color: black;
             margin-left: 30%;
             margin-top: 20px;
             font-weight: bold;
-          "
-        >
-          Welcome {{ username }}
+          ">
+          Welcome {{username}}
         </h1>
       </div>
     </div>
   </div>
   <!-- .................................... -->
-  <div class="row mt-5 border">
-    <div class="col-4 border">
-      <button class="btn btn-primary p-1" (click)="toStudentFormCompo()">
-        Enroll as Student
-      </button>
-    </div>
-
-    <div class="col-4 border">
-      <button class="btn btn-primary p-1">Enroll as Teacher</button>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <div class="card p-3">
+          <div class="card-body">
+            <h5 class="card-title">Join as Student</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, unde.</p>
+            <button (click)="toStudentFormCompo()" class="btn btn-outline-success p-2 m-1">Student Enrollment</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-6">
+        <div class="card text-right p-3">
+          <div class="card-body">
+            <h5 class="card-title">Join as Teacher</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, dolorem?</p>
+            <button class="btn btn-outline-success p-2 m-1">Teacher Enrollment</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  
+
+
+
+
 </div>

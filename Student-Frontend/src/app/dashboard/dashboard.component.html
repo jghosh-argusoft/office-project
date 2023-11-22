@@ -1,26 +1,50 @@
-<button style="margin:20px;"(click)="fetchUsers()" class="btn btn-primary">Fetch Users</button>
-<table class="table table-striped">
-  <thead class="bg-dark text-white">
-    <tr>
-      <th>ID</th>
-      <th>Username</th>
-      <th>Email</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Gender</th>
-      <th>Date of Birth</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.id }}</td>
-      <td>{{ user.username }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.firstname }}</td>
-      <td>{{ user.lastname }}</td>
-      <td>{{ user.gender }}</td>
-      <td>{{ user.dob | date:'mediumDate' }}</td>
+<button style="margin:20px;" (click)="fetchUsers()" class="btn btn-primary">Fetch Users</button>
+<button style="margin:20px;" (click)="showApprovalList()" class="btn btn-primary">Fetch Approval</button>
 
-    </tr>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="bg-dark text-white">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+        <th *ngIf="!showUsersList">Role</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="showUsersList; else approvalList">
+      <!-- Display users list -->
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.lastname }}</td>
+        <td>{{ user.gender }}</td>
+        <td>{{ user.dob | date:'mediumDate' }}</td>
+        <td></td>
+      </tr>
+    </tbody>
+    <ng-template #approvalList>
+      <!-- Display approvals list -->
+      <tr *ngFor="let approval of approvals">
+        <td>{{ approval.id }}</td>
+        <td>{{ approval.username }}</td>
+        <td>{{ approval.email }}</td>
+        <td>{{ approval.firstname }}</td>
+        <td>{{ approval.lastname }}</td>
+        <td>{{ approval.gender }}</td>
+        <td>{{ approval.dob | date:'mediumDate' }}</td>
+        <td>{{ approval.role }}</td>
+        <td>
+          <button type="button" class="btn btn-success btn-sm" (click)="approveUser(approval.username)">Approve</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="deleteApprovals(approval.username)">Delete</button>
+        </td>
+      </tr>
+    </ng-template>
+  </table>
+</div>

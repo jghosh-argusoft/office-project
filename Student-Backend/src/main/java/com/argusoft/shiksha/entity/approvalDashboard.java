@@ -5,51 +5,52 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="_user")
-public class User {
-
+@Table(name = "approve_dashboard")
+public class approvalDashboard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int user_id;
+    @Column(name = "approve_id")
+    private int approve_id;
 
-    @Column(name = "username")
+    @Column(name = "ad_username")
     private String username;
 
-    @Column(name = "email")
+    @Column(name = "ad_email")
     private String email;
 
-    @Column(name = "first_name")
+    @Column(name = "ad_first_name")
     private String firstname;
 
-    @Column(name = "last_name")
+    @Column(name = "ad-last_name")
     private String lastname;
 
-    @Column(name = "gender")
+    @Column(name = "ad_gender")
     private String gender;
 
 
-    @Column(name = "password",updatable = false)
+    @Column(name = "ad_password",updatable = false)
     private String password;
 
-    @Column(name = "dob")
+    @Column(name = "ad_dob")
     @Temporal(TemporalType.DATE)
     private Date dob;
 
+    //ADDITIONAL STUDENT ONLY FIELDS
 
-    @Column(name = "verification_code")
-    private String verificationCode;
+    @Column(name = "ad-graduation")
+    private String graduation;
 
-    @Column(name = "is_verified")
-    private boolean verified=false;
-//========================================================================
+    @Column(name = "ad_role")
+    private String role;
 
-    public User() {
+    //.................................................................................................
+
+    public approvalDashboard() {
     }
 
-    public User(int user_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob,String verificationCode, boolean verified) {
-        this.user_id = user_id;
+    public approvalDashboard(int approve_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob, String graduation, String role) {
+        this.approve_id = approve_id;
         this.username = username;
         this.email = email;
         this.firstname = firstname;
@@ -57,38 +58,16 @@ public class User {
         this.gender = gender;
         this.password = password;
         this.dob = dob;
-
-        this.verificationCode = verificationCode;
-        this.verified = verified;
+        this.graduation = graduation;
+        this.role = role;
     }
 
-
-
-
-    public boolean isVerified() {
-        return verified;
+    public int getApprove_id() {
+        return approve_id;
     }
 
-    public void setVerified(boolean verified) {
-        this.verified = verified;
-    }
-
-
-
-    public String getVerificationCode() {
-        return verificationCode;
-    }
-
-    public void setVerificationCode(String verificationCode) {
-        this.verificationCode = verificationCode;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setApprove_id(int approve_id) {
+        this.approve_id = approve_id;
     }
 
     public String getUsername() {
@@ -147,10 +126,26 @@ public class User {
         this.dob = dob;
     }
 
+    public String getGraduation() {
+        return graduation;
+    }
+
+    public void setGraduation(String graduation) {
+        this.graduation = graduation;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "user_id=" + user_id +
+        return "approvalDashboard{" +
+                "approve_id=" + approve_id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", firstname='" + firstname + '\'' +
@@ -158,13 +153,8 @@ public class User {
                 ", gender='" + gender + '\'' +
                 ", password='" + password + '\'' +
                 ", dob=" + dob +
-                ", verificationCode='" + verificationCode + '\'' +
-                ", verified=" + verified +
+                ", graduation='" + graduation + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
-
-
-
-
-

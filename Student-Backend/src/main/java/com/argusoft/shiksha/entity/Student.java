@@ -36,13 +36,18 @@ public class Student {
     @Temporal(TemporalType.DATE)
     private Date studentDob;
 
+
+
     //ADDITIONAL STUDENT ONLY FIELDS
 
+    @Column(name = "std-graduation")
+    private String graduation;
 
+//..................................................................................................................
     public Student() {
     }
 
-    public Student(int student_id, String studentUsername, String studentEmail, String studentFirstname, String studentLastname, String studentGender, String studentPassword, Date studentDob) {
+    public Student(int student_id, String studentUsername, String studentEmail, String studentFirstname, String studentLastname, String studentGender, String studentPassword, Date studentDob, String graduation) {
         this.student_id = student_id;
         this.studentUsername = studentUsername;
         this.studentEmail = studentEmail;
@@ -51,7 +56,9 @@ public class Student {
         this.studentGender = studentGender;
         this.studentPassword = studentPassword;
         this.studentDob = studentDob;
+        this.graduation=graduation;
     }
+
 
     public int getStudent_id() {
         return student_id;
@@ -115,6 +122,14 @@ public class Student {
 
     public void setStudentDob(Date studentDob) {
         this.studentDob = studentDob;
+    }
+
+    public String getGraduation() {
+        return graduation;
+    }
+
+    public void setGraduation(String graduation) {
+        this.graduation = graduation;
     }
 
     @Override

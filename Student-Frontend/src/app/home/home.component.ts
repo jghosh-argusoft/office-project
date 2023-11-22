@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
         this.ulService.getUserByUsername(this.username).subscribe(
           (user) => {
-            console.log(user);
+            console.log(this.username,"===");
             this.currentUser = user;
           },
           (error) => {
@@ -42,8 +42,7 @@ export class HomeComponent implements OnInit {
     const navigationExtras = {
       queryParams: { username: this.username },
     };
-
+    
     this.router.navigate(['/studentForm'], navigationExtras);
   }
-  
 }
