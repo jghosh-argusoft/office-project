@@ -1,4 +1,4 @@
-export interface approvalDash {
+export interface Teacher{
     id:number;
     username: string;
     email: string;
@@ -7,8 +7,6 @@ export interface approvalDash {
     gender: string;
     password: string;
     dob: Date; 
-    graduation:String;
-    role:String;
-    teachExp:String
+    teachExp:String;
+    approveStatus:Boolean
   }
-  

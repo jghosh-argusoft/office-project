@@ -14,28 +14,27 @@ public class Student {
     private int student_id;
 
     @Column(name = "student_username")
-    private String studentUsername;
+    private String username;
 
     @Column(name = "student_email")
-    private String studentEmail;
+    private String email;
 
     @Column(name = "student_first_name")
-    private String studentFirstname;
+    private String firstname;
 
     @Column(name = "student-last_name")
-    private String studentLastname;
+    private String lastname;
 
     @Column(name = "student_gender")
-    private String studentGender;
+    private String gender;
 
 
     @Column(name = "student_password",updatable = false)
-    private String studentPassword;
+    private String password;
 
     @Column(name = "student_dob")
     @Temporal(TemporalType.DATE)
-    private Date studentDob;
-
+    private Date dob;
 
 
     //ADDITIONAL STUDENT ONLY FIELDS
@@ -43,22 +42,33 @@ public class Student {
     @Column(name = "std-graduation")
     private String graduation;
 
+    @Column(name = "approveStatus")
+    private Boolean approveStatus=false;
+
 //..................................................................................................................
     public Student() {
     }
 
-    public Student(int student_id, String studentUsername, String studentEmail, String studentFirstname, String studentLastname, String studentGender, String studentPassword, Date studentDob, String graduation) {
+    public Student(int student_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob, String graduation,Boolean approveStatus) {
         this.student_id = student_id;
-        this.studentUsername = studentUsername;
-        this.studentEmail = studentEmail;
-        this.studentFirstname = studentFirstname;
-        this.studentLastname = studentLastname;
-        this.studentGender = studentGender;
-        this.studentPassword = studentPassword;
-        this.studentDob = studentDob;
-        this.graduation=graduation;
+        this.username = username;
+        this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.password = password;
+        this.dob = dob;
+        this.graduation = graduation;
+        this.approveStatus=approveStatus;
     }
 
+    public Boolean getApproveStatus() {
+        return approveStatus;
+    }
+
+    public void setApproveStatus(Boolean approveStatus) {
+        this.approveStatus = approveStatus;
+    }
 
     public int getStudent_id() {
         return student_id;
@@ -68,60 +78,60 @@ public class Student {
         this.student_id = student_id;
     }
 
-    public String getStudentUsername() {
-        return studentUsername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setStudentUsername(String studentUsername) {
-        this.studentUsername = studentUsername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getStudentEmail() {
-        return studentEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getStudentFirstname() {
-        return studentFirstname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setStudentFirstname(String studentFirstname) {
-        this.studentFirstname = studentFirstname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getStudentLastname() {
-        return studentLastname;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setStudentLastname(String studentLastname) {
-        this.studentLastname = studentLastname;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public String getStudentGender() {
-        return studentGender;
+    public String getGender() {
+        return gender;
     }
 
-    public void setStudentGender(String studentGender) {
-        this.studentGender = studentGender;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getStudentPassword() {
-        return studentPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setStudentPassword(String studentPassword) {
-        this.studentPassword = studentPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Date getStudentDob() {
-        return studentDob;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setStudentDob(Date studentDob) {
-        this.studentDob = studentDob;
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
     public String getGraduation() {
@@ -136,13 +146,14 @@ public class Student {
     public String toString() {
         return "Student{" +
                 "student_id=" + student_id +
-                ", studentUsername='" + studentUsername + '\'' +
-                ", studentEmail='" + studentEmail + '\'' +
-                ", studentFirstname='" + studentFirstname + '\'' +
-                ", studentLastname='" + studentLastname + '\'' +
-                ", studentGender='" + studentGender + '\'' +
-                ", studentPassword='" + studentPassword + '\'' +
-                ", studentDob=" + studentDob +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", gender='" + gender + '\'' +
+                ", password='" + password + '\'' +
+                ", dob=" + dob +
+                ", graduation='" + graduation + '\'' +
                 '}';
     }
 }

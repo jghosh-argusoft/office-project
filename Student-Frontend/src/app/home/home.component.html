@@ -18,30 +18,91 @@
   <!-- .................................... -->
   <div class="container">
     <div class="row mt-5">
-      <div class="col-md-6">
-        <div class="card p-3">
-          <div class="card-body">
-            <h5 class="card-title">Join as Student</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, unde.</p>
-            <button (click)="toStudentFormCompo()" class="btn btn-outline-success p-2 m-1">Student Enrollment</button>
-          </div>
-        </div>
-      </div>
-  
-      <div class="col-md-6">
-        <div class="card text-right p-3">
-          <div class="card-body">
-            <h5 class="card-title">Join as Teacher</h5>
+
+      <div class="col-md-12">
+        <mat-card>
+          <mat-card-content>
+            <h3 class="card-title">Join as Teacher</h3>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, dolorem?</p>
-            <button class="btn btn-outline-success p-2 m-1">Teacher Enrollment</button>
-          </div>
-        </div>
+            <button class="btn btn-outline-success p-1 m-1" mat-button (click)="toTeacherForm()">Teacher Enrollment</button>
+          </mat-card-content>
+        </mat-card>
       </div>
+
+
+      <div class="col-md-12 mt-3" *ngIf="showTeacherForm">
+        <mat-expansion-panel >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Teacher Enrollment Form
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <form [formGroup]="teacherForm" (ngSubmit)="enrollTeacher()"
+                    [ngClass]="{ border: teacherForm.invalid }">
+
+            <div class="form-group">
+              <label for="firstname">First Name</label>
+              <input type="text" id="firstname" formControlName="firstname" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label for="lastname">Last Name</label>
+              <input type="text" id="lastname" formControlName="lastname" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" formControlName="email" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" formControlName="password" class="form-control" />
+          </div>
+          <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" formControlName="username" class="form-control" />
+          </div>
+
+          <div class="form-group">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" formControlName="dob" class="form-control" />
+          </div>
+
+          <div class="form-group" style="display: flex; justify-content: space-around">
+              <label for="gender">Gender</label>
+              <div class="form-check">
+                  <input type="radio" id="male" value="Male" formControlName="gender"
+                      class="form-check-input" />
+                  <label for="male" class="form-check-label">Male</label>
+              </div>
+              <div class="form-check">
+                  <input type="radio" id="female" value="Female" formControlName="gender"
+                      class="form-check-input" />
+                  <label for="female" class="form-check-label">Female</label>
+              </div>
+              <div class="form-check">
+                  <input type="radio" id="other" value="Other" formControlName="gender"
+                      class="form-check-input" />
+                  <label for="other" class="form-check-label">Other</label>
+              </div>
+          </div>
+          <hr>
+          <h3>Additional Information</h3>
+          <hr>
+          <div class="form-group">
+              <label for="teachExp">Teaching Experience</label>
+              <textarea name="teachExp" id="teachExp" cols="10" rows="5" formControlName="teachExp"
+                  class="form-control"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary m-2">
+              Enroll as Teacher 
+          </button>
+          </form>
+        </mat-expansion-panel>
+      </div>
+
     </div>
   </div>
-  
-
-
 
 
 </div>

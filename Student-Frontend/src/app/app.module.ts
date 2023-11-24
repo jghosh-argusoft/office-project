@@ -13,7 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxCaptchaModule } from 'ngx-captcha';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
 
 
 // import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module,RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
@@ -25,8 +26,7 @@ import { VerifyComponent } from './verify/verify.component';
 import { LogoutComponent } from './logout/logout.component';
 import { DashboardComponent} from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
-import { StudentFormComponent } from './student-form/student-form.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -39,7 +39,6 @@ import { StudentFormComponent } from './student-form/student-form.component';
     VerifyComponent,
     LogoutComponent,
     DashboardComponent,
-    StudentFormComponent
 
 
   ],
@@ -53,7 +52,10 @@ import { StudentFormComponent } from './student-form/student-form.component';
     NgxCaptchaModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatExpansionModule
 
   ],
   providers: [UserListService],

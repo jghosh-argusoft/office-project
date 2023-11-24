@@ -8,6 +8,8 @@ import { approvalDash } from './shared/approvalDash.model';
   providedIn: 'root',
 })
 export class UserListService {
+
+  username:String="";
   private baseUrl: string = 'http://localhost:8080/api/users';
 
   constructor(private http: HttpClient) { }

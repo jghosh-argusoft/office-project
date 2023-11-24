@@ -1,18 +1,14 @@
 package com.argusoft.shiksha.controller;
 
 import com.argusoft.shiksha.entity.User;
-import com.argusoft.shiksha.entity.UserRole;
 import com.argusoft.shiksha.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -80,15 +76,6 @@ public class UserController {
         }
     }
 
-    @PostMapping("/createRole")
-    public UserRole createUserRole(@RequestBody UserRole userRole) {
-        return userService.createUserRole(userRole);
-    }
-
-    @GetMapping("/getRoles")
-    public List<UserRole> getAllUserRoles() {
-        return userService.getAllUserRoles();
-    }
 
 //    @GetMapping("/{username}/verificationCode")
 //    public String getVerificationCode(@PathVariable String username){

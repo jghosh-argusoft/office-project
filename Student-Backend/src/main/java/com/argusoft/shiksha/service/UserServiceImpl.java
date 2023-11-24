@@ -1,9 +1,7 @@
 package com.argusoft.shiksha.service;
 
 import com.argusoft.shiksha.entity.User;
-import com.argusoft.shiksha.entity.UserRole;
 import com.argusoft.shiksha.repository.UserRepository;
-import com.argusoft.shiksha.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,7 +10,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     private UserRepository userRepository;
-    private UserRoleRepository userRoleRepository;
     //For mail service
     @Autowired
     private EmailSenderService emailSenderService;
@@ -69,14 +66,5 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
     }
 
-    @Override
-    public UserRole createUserRole(UserRole userRole) {
-        UserRole newCreateuserRole = userRoleRepository.save(userRole);
-        return newCreateuserRole;
-    }
-    @Override
-    public List<UserRole> getAllUserRoles() {
-        return userRoleRepository.findAll();
-    }
 
 }

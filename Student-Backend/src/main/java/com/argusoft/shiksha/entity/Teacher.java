@@ -5,58 +5,51 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "approve_dashboard")
-public class approvalDashboard {
-
+@Table(name = "teacher")
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "approve_id")
-    private int approve_id;
+    @Column(name = "teacher_id")
+    private int teacher_id;
 
-    @Column(name = "ad_username")
+    @Column(name = "teacher_username")
     private String username;
 
-    @Column(name = "ad_email")
+    @Column(name = "teacher_email")
     private String email;
 
-    @Column(name = "ad_first_name")
+    @Column(name = "teacher_first_name")
     private String firstname;
 
-    @Column(name = "ad-last_name")
+    @Column(name = "teacher-last_name")
     private String lastname;
 
-    @Column(name = "ad_gender")
+    @Column(name = "teacher_gender")
     private String gender;
 
 
-    @Column(name = "ad_password",updatable = false)
+    @Column(name = "teacher_password",updatable = false)
     private String password;
 
-    @Column(name = "ad_dob")
+    @Column(name = "teacher_dob")
     @Temporal(TemporalType.DATE)
     private Date dob;
 
-    //ADDITIONAL STUDENT ONLY FIELDS
 
-    @Column(name = "ad-graduation")
-    private String graduation;
 
-    @Column(name = "ad_role")
-    private String role;
-
-    @Column(name = "ad-teachExp")
+    //ADDITIONAL teacher ONLY FIELDS
+    @Column(name = "teachExp")
     private String teachExp;
 
+    @Column(name = "approveStatus")
+    private Boolean approveStatus=false;
 
 
-
-    //.................................................................................................
-
-    public approvalDashboard() {
+    public Teacher() {
     }
 
-    public approvalDashboard(int approve_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob, String graduation, String role,String teachExp) {
-        this.approve_id = approve_id;
+    public Teacher(int teacher_id, String username, String email, String firstname, String lastname, String gender, String password, Date dob, String teachExp,Boolean approveStatus) {
+        this.teacher_id = teacher_id;
         this.username = username;
         this.email = email;
         this.firstname = firstname;
@@ -64,26 +57,24 @@ public class approvalDashboard {
         this.gender = gender;
         this.password = password;
         this.dob = dob;
-        this.graduation = graduation;
-        this.role = role;
-        this.teachExp=teachExp;
-    }
-
-
-    public String getTeachExp() {
-        return teachExp;
-    }
-
-    public void setTeachExp(String teachExp) {
         this.teachExp = teachExp;
+        this.approveStatus=approveStatus;
     }
 
-    public int getApprove_id() {
-        return approve_id;
+    public Boolean getApproveStatus() {
+        return approveStatus;
     }
 
-    public void setApprove_id(int approve_id) {
-        this.approve_id = approve_id;
+    public void setApproveStatus(Boolean approveStatus) {
+        this.approveStatus = approveStatus;
+    }
+
+    public int getTeacher_id() {
+        return teacher_id;
+    }
+
+    public void setTeacher_id(int teacher_id) {
+        this.teacher_id = teacher_id;
     }
 
     public String getUsername() {
@@ -142,26 +133,18 @@ public class approvalDashboard {
         this.dob = dob;
     }
 
-    public String getGraduation() {
-        return graduation;
+    public String getTeachExp() {
+        return teachExp;
     }
 
-    public void setGraduation(String graduation) {
-        this.graduation = graduation;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setTeachExp(String teachExp) {
+        this.teachExp = teachExp;
     }
 
     @Override
     public String toString() {
-        return "approvalDashboard{" +
-                "approve_id=" + approve_id +
+        return "Teacher{" +
+                "teacher_id=" + teacher_id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", firstname='" + firstname + '\'' +
@@ -169,8 +152,7 @@ public class approvalDashboard {
                 ", gender='" + gender + '\'' +
                 ", password='" + password + '\'' +
                 ", dob=" + dob +
-                ", graduation='" + graduation + '\'' +
-                ", role='" + role + '\'' +
+                ", teachExp='" + teachExp + '\'' +
                 '}';
     }
 }

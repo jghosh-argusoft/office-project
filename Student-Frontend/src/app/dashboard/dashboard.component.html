@@ -1,5 +1,5 @@
 <button style="margin:20px;" (click)="fetchUsers()" class="btn btn-primary">Fetch Users</button>
-<button style="margin:20px;" (click)="showApprovalList()" class="btn btn-primary">Fetch Approval</button>
+<button style="margin:20px;" (click)="showTeacherApprovalList()" class="btn btn-primary">Fetch Approval</button>
 
 <div class="table-responsive">
   <table class="table table-striped">
@@ -12,7 +12,7 @@
         <th>Last Name</th>
         <th>Gender</th>
         <th>Date of Birth</th>
-        <th *ngIf="!showUsersList">Role</th>
+        <th *ngIf="!showUsersList">Teacher Experience</th>
         <th></th>
       </tr>
     </thead>
@@ -31,18 +31,18 @@
     </tbody>
     <ng-template #approvalList>
       <!-- Display approvals list -->
-      <tr *ngFor="let approval of approvals">
-        <td>{{ approval.id }}</td>
+      <tr *ngFor="let approval of teacherapprovals$ | async">
+        <td>{{ approval.id }} </td>
         <td>{{ approval.username }}</td>
         <td>{{ approval.email }}</td>
         <td>{{ approval.firstname }}</td>
         <td>{{ approval.lastname }}</td>
         <td>{{ approval.gender }}</td>
         <td>{{ approval.dob | date:'mediumDate' }}</td>
-        <td>{{ approval.role }}</td>
+        <td>{{approval.teachExp}}</td>
         <td>
-          <button type="button" class="btn btn-success btn-sm" (click)="approveUser(approval.username)">Approve</button>
-          <button type="button" class="btn btn-danger btn-sm" (click)="deleteApprovals(approval.username)">Delete</button>
+          <button type="button" class="btn btn-success btn-sm" (click)="approveTeacher(approval.username)">Approve</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="deleteTeacherApprovals(approval.username)">Delete</button>
         </td>
       </tr>
     </ng-template>
