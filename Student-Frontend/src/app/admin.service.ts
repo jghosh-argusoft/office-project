@@ -11,6 +11,7 @@ import { Teacher } from "./shared/teacher.model";
 export class AdminService {
 
 
+
   private apiUrl = 'http://localhost:8080/api/admin';
 
   constructor(private http: HttpClient) { }
@@ -24,17 +25,17 @@ export class AdminService {
   // getStudentApprovals(): Observable<Student[]> {
   //   return this.http.get<Student[]>(`${this.apiUrl}/getAllStudentApprovals`)
   // }
-  getAllTeacherApprovals(): Observable<Teacher[]> {
-    return this.http.get<Teacher[]>(`${this.apiUrl}/getAllTeacherApprovals`)
-  }
+  // getAllTeacherApprovals(): Observable<Teacher[]> {
+  //   return this.http.get<Teacher[]>(`${this.apiUrl}/getAllTeacherApprovals`)
+  // }
 
   // getAllApprovals(): Observable<approvalDash[]> {
   //     return this.http.get<approvalDash[]>(`${this.apiUrl}/getAllApprovals`);
   // }
 
-  deleteTeacherApprovals(username: String): Observable<any> {
+  deleteTeacherApprovals(username: String): Observable<Teacher> {
     console.log("username 2 "+username)
-    return this.http.delete(`${this.apiUrl}/deleteTeacherApproval/${username}`)
+    return this.http.delete<Teacher>(`${this.apiUrl}/deleteTeacherApproval/${username}`)
   }
 
 
@@ -42,5 +43,9 @@ export class AdminService {
     console.log("before api call in approva approvals " + username)
 
     return this.http.put<approvalDash>(`${this.apiUrl}/approveTeacherApproval/${username}`, {});
+  }
+
+  getAllTeacherApprovals() {
+    return this.http.get<Teacher[]>('http://localhost:8080/api/admin/getAllTeacherApprovals');
   }
 }

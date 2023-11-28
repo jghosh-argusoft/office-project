@@ -52,18 +52,7 @@ public class AdminController {
 
 
 
-    @DeleteMapping("/delete/{username}")
-    public List<approvalDashboard> deleteApproval(@PathVariable String username) {
-        List<approvalDashboard> approvalDashboards = apRepo.findAllByUsername(username);
 
-        if (!approvalDashboards.isEmpty()) {
-            apRepo.deleteAll(approvalDashboards);
-            System.out.println("The username: " + username + " deleted .........");
-            return approvalDashboards;
-        } else {
-            return Collections.emptyList();
-        }
-    }
 
 //    @PostMapping("/approve/{username}")
 //    public approvalDashboard approveApprovals(@PathVariable String username) {
@@ -97,16 +86,18 @@ public class AdminController {
     }
 
     @DeleteMapping("/deleteTeacherApproval/{username}")
-    public ResponseEntity<String> deleteTeacherApprovals(@PathVariable String username) {
+    public ResponseEntity<Teacher> deleteTeacherApprovals(@PathVariable String username) {
         Teacher rejectedApproval = TeachRepo.findByUsername(username);
 
         if (rejectedApproval != null) {
             TeachRepo.delete(rejectedApproval);
-            return ResponseEntity.ok("Teacher approval deleted successfully.");
+
+            return ResponseEntity.ok(rejectedApproval);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Teacher approval not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
     @PutMapping("/approveTeacherApproval/{username}")
     public ResponseEntity<String> approveTeacherApprovals(@PathVariable String username) {
         try {
@@ -124,6 +115,5 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error.");
         }
     }
-
 
 }

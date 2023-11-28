@@ -1,6 +1,13 @@
-<button style="margin:20px;" (click)="fetchUsers()" class="btn btn-primary">Fetch Users</button>
-<button style="margin:20px;" (click)="showTeacherApprovalList()" class="btn btn-primary">Fetch Approval</button>
+<!-- <button style="margin:20px;" routerLink="userDashboard"  (click)="fetchUsers()" class="btn btn-primary">Fetch Users</button>
+<button style="margin:20px;" routerLink="teacherDashboard"  (click)="showTeacherApprovalList()" class="btn btn-primary">Fetch Approval</button> -->
 
+<button style="margin:20px;" routerLink="userDashboard"   class="btn btn-primary">Fetch Users</button>
+<button style="margin:20px;" routerLink="teacherDashboard"   class="btn btn-primary">Fetch Approval</button>
+
+<router-outlet></router-outlet>
+
+
+<!-- 
 <div class="table-responsive">
   <table class="table table-striped">
     <thead class="bg-dark text-white">
@@ -17,7 +24,7 @@
       </tr>
     </thead>
     <tbody *ngIf="showUsersList; else approvalList">
-      <!-- Display users list -->
+
       <tr *ngFor="let user of users">
         <td>{{ user.id }}</td>
         <td>{{ user.username }}</td>
@@ -30,8 +37,7 @@
       </tr>
     </tbody>
     <ng-template #approvalList>
-      <!-- Display approvals list -->
-      <tr *ngFor="let approval of teacherapprovals$ | async">
+      <tr *ngFor="let approval of teacherapprovals">
         <td>{{ approval.id }} </td>
         <td>{{ approval.username }}</td>
         <td>{{ approval.email }}</td>
@@ -47,4 +53,4 @@
       </tr>
     </ng-template>
   </table>
-</div>
+</div> -->

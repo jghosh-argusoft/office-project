@@ -1,11 +1,14 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { User } from '../shared/user.model';
 import { UserListService } from '../user-list.service';
 import { approvalDash } from '../shared/approvalDash.model';
 import { AdminService } from '../admin.service';
 import { Student } from '../shared/student.model';
 import { Teacher } from '../shared/teacher.model';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, catchError, map, tap, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,76 +18,126 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class DashboardComponent {
 
+  constructor(private userListService: UserListService, private adminService: AdminService, private cdr: ChangeDetectorRef, private http: HttpClient) { }
 
-  users: User[] = [];
-  teacherapprovals: Teacher[] = [];
-
-//for change detection
-  teacherApprovalsSubject=new BehaviorSubject<Teacher[]>([]);
-  teacherapprovals$ = this.teacherApprovalsSubject.asObservable();
-  teacherListChanged = new Subject<Teacher[]>();
-
-
-
-  showUsersList: boolean = false;
-
-  constructor(private userListService: UserListService, private adminService: AdminService, private cdr: ChangeDetectorRef) { }
+  @ViewChild(UserDashboardComponent) userDashboard!: UserDashboardComponent;
+  @ViewChild(TeacherDashboardComponent) teacherDashboard!: TeacherDashboardComponent;
 
   fetchUsers() {
-    this.userListService.getAllUsers().subscribe(
-      (data) => {
-        this.users = data;
-      },
-      (error) => {
-        console.error('Error fetching users:', error);
-      }
-    );
-    this.showUsersList = true;
+    if (this.userDashboard) {
+      this.userDashboard.fetchUsers();
+    }
   }
-
-  showTeacherApprovalList() {
-    this.showUsersList = false;
-    this.adminService.getAllTeacherApprovals().subscribe(
-      (data) => {
-        console.log("====="+data)
-        this.teacherapprovals = data;
-      },
-      (error) => {
-        console.error('Error fetching approvals:', error);
-      }
-    )
+  showTeacherApprovalList(){
+    if(this.teacherDashboard){
+      this.teacherDashboard.showTeacherApprovalList()
+    }
   }
+  
+  //for change detection
+  // teacherApprovalsSubject=new BehaviorSubject<Teacher[]>([]);
+  // teacherapprovals$ = this.teacherApprovalsSubject.asObservable();
+  // teacherListChanged = new Subject<Teacher[]>();
 
-  deleteTeacherApprovals(username: String) {
-    console.log("username"+username)
-    this.adminService.deleteTeacherApprovals(username).subscribe(
-      () => {
-        console.log(`Approval with username ${username} deleted successfully.`);
 
-        ///////////////////////
-        const updateApprovals=this.teacherApprovalsSubject.value.filter(approval => approval.username!==username);
-        this.teacherApprovalsSubject.next(updateApprovals);
 
-        this.teacherListChanged.next(this.teacherapprovals.slice());
-        this.cdr.detectChanges();
-        /////////////////////////
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
-  }
+  // showUsersList: boolean = false;
 
-  approveTeacher(username: String) {
-    this.adminService.approveTeacherApprovals(username).subscribe(
-      (data) => {
-        console.log("Data" + data)
-        console.log(`Approval with username ${username} approved successfully.`);
-      },
-      (error) => {
-        console.log(error)
-      }
-    )
-  }
+
+  // users: User[] = [];
+  // teacherapprovals: Teacher[] = [];
+
+  // fetchUsers() {
+  //   this.userListService.getAllUsers().subscribe(
+  //     (data) => {
+  //       this.users = [...data]
+  //       this.cdr.markForCheck()
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching users:', error);
+  //     }
+  //   );
+  //   this.showUsersList = true;
+  // }
+
+  // the below is old one.............
+  // // showTeacherApprovalList() {
+  // //   this.showUsersList = false;
+  // //   // this.adminService.getAllTeacherApprovals().subscribe(
+  // //   //   (data) => {
+  // //   //     console.log("====="+data)
+  // //   //     this.teacherapprovals = [...data];
+  // //   //     this.cdr.markForCheck()
+  // //   //   },
+  // //   //   (error) => {
+  // //   //     console.error('Error fetching approvals:', error);
+  // //   //   }
+  // //   // )
+
+  // //   return this.http.get<Teacher[]>('http://localhost:8080/api/admin/getAllTeacherApprovals')
+  // //     .pipe(
+  // //       map((teachers) => {
+  // //         return teachers.map((teacher) => {
+  // //           return {
+  // //             ...teacher,
+  // //             teachers: this.teacherapprovals ? this.teacherapprovals : []
+  // //           };
+  // //         });
+  // //       }),
+  // //       tap((teachers) => {
+  // //         this.setTeachers(teachers);
+  // //       })
+  // //     );
+  // //   // getAllTeacherApprovals(): Observable<Teacher[]> {
+  // //   //   return this.http.get<Teacher[]>(`${this.apiUrl}/getAllTeacherApprovals`)
+  // // }
+
+  //below is updated..........
+  // showTeacherApprovalList() {
+  //   this.showUsersList = false;
+
+  //   this.adminService.getAllTeacherApprovals().pipe(
+  //     tap((data) => {
+  //       this.teacherapprovals = [...data];
+  //       this.cdr.markForCheck();
+  //     })
+  //   ).subscribe(
+  //     (response) => { console.log("The responese " + JSON.stringify(response)) },
+  //     (error) => {
+  //       console.error('Error fetching approvals:', error);
+  //     }
+  //   );
+  // }
+
+  // /////////////
+  // deleteTeacherApprovals(username: string) {
+  //   console.log("username" + username);
+  //   this.adminService.deleteTeacherApprovals(username).pipe(
+  //     tap((response) => {
+  //       console.log(`Approval with username ${username} deleted successfully.`, JSON.stringify(response));
+  //       this.teacherapprovals = this.teacherapprovals.filter((approval) => approval.username !== username);
+  //       this.cdr.markForCheck();
+  //       this.showTeacherApprovalList();
+  //     }),
+  //     catchError((error) => {
+  //       console.log(error);
+  //       // Handle error as per your requirement
+  //       return throwError(error);
+  //     })
+  //   ).subscribe();
+  // }
+
+
+  // approveTeacher(username: String) {
+  //   this.adminService.approveTeacherApprovals(username).subscribe(
+  //     (data) => {
+  //       console.log("Data" + data)
+  //       console.log(`Approval with username ${username} approved successfully.`);
+  //     },
+  //     (error) => {
+  //       console.log(error)
+  //     }
+  //   )
+  // }
 
 }

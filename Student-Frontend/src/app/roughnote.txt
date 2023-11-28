@@ -1,0 +1,2 @@
+cut from deleteTeacherApproval in dashboard.ts 
+ 

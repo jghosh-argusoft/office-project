@@ -17,6 +17,13 @@ const routes: Routes = [
   {path:'login',component: LoginComponent},
   {path:'logout',component: LogoutComponent},
   {path:'dashboard',component:DashboardComponent}
+  // {
+  //   path: 'dashboard',
+  //   loadChildren: () =>
+  //     import('./dashboard/dashboard-routing.module').then(
+  //       (mod) => mod.DashboardRoutingModule
+  //     ),
+  // },
 ];
 
 @NgModule({

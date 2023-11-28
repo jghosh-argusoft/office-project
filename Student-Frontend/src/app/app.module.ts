@@ -27,6 +27,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { DashboardComponent} from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserDashboardComponent } from './dashboard/user-dashboard/user-dashboard.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -39,6 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     VerifyComponent,
     LogoutComponent,
     DashboardComponent,
+    UserDashboardComponent,
 
 
   ],
@@ -55,7 +58,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    CommonModule,
 
   ],
   providers: [UserListService],
