@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -16,6 +16,10 @@ export class SharedClass{
 getLoginStat(){
     return this.isLoggedIn;
 }
+
+public globalUsername = new BehaviorSubject<any>({
+    globalProperty: ''
+  });
     
 
 }

@@ -39,6 +39,13 @@ export class LoginComponent {
         (user) => {
           if (user && user.password === password) {
             this.SharedData.setLoginStatus(true)
+
+            //Set value in gloabal vatiable 
+            this.SharedData.globalUsername.next({
+              globalProperty: username
+            })
+          
+
             this.router.navigate(['/home'],{queryParams:{username:user.username}});
           } else {
             console.log('Authentication failed. Please check your credentials.');

@@ -13,7 +13,6 @@ export class NavComponent {
   constructor(private router: Router,private shareData: SharedClass, private activatedRoute: ActivatedRoute) {
   }
  
-
   navigationItems:{text:String,route:String}[]=[
     {text:"Home",route:"/home"},
     {text:"Dashboard",route:"/dashboard"},

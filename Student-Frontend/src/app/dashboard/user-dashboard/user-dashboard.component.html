@@ -1,5 +1,8 @@
 <!-- <button style="margin: 20px" (click)="fetchUsers()" class="btn btn-primary">
   Fetch Users
+</button> -->
+<button style="margin: 20px" routerLink="../teacherDashboard" class="btn btn-primary">
+  Fetch Teachers
 </button>
 
 <div class="table-responsive">
@@ -19,16 +22,16 @@
     <tbody>
       <tr *ngFor="let user of users">
         <td>{{ user.id }}</td>
-        <td>{{ user.username }}</td>
+        <!-- <td>{{ user.username }}</td> -->
+        <div>{{ globalUsername | async | json }}</div>
         <td>{{ user.email }}</td>
-        <td>{{ user.firstname }}</td>
-        <td>{{ user.lastname }}</td>
+        <td>{{ user.firstname | ShortenPipe:3}}</td>
+        <td>{{ user.lastname | ShortenPipe:3}}</td>
         <td>{{ user.gender }}</td>
-        <td>{{ user.dob | date : "mediumDate" }}</td>
+        <td>{{ user.dob | date : "fullDate"  }}</td>
         <td></td>
       </tr>
     </tbody>
   </table>
-</div> -->
+</div> 
 
-<p>inside user </p>

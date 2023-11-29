@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { catchError, tap, throwError } from 'rxjs';
 import { AdminService } from 'src/app/admin.service';
 import { Teacher } from 'src/app/shared/teacher.model';
@@ -10,10 +10,17 @@ import { UserListService } from 'src/app/user-list.service';
   templateUrl: './teacher-dashboard.component.html',
   styleUrls: ['./teacher-dashboard.component.css']
 })
-export class TeacherDashboardComponent {
+export class TeacherDashboardComponent implements OnInit{
 
   teacherapprovals: Teacher[] = [];
   constructor(private userListService: UserListService, private adminService: AdminService, private cdr: ChangeDetectorRef, private http: HttpClient) { }
+
+
+
+  ngOnInit(): void {
+   this.showTeacherApprovalList()
+  }
+
 
 
   showTeacherApprovalList() {
@@ -21,6 +28,7 @@ export class TeacherDashboardComponent {
     this.adminService.getAllTeacherApprovals().pipe(
       tap((data) => {
         this.teacherapprovals = [...data];
+        console.log('teachers approval list : ',this.teacherapprovals);
         this.cdr.markForCheck();
       })
     ).subscribe(

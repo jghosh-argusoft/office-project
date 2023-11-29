@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
+import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
-  {
-    path: 'userDashboard', loadChildren: () => import('./user-dashboard/user-dashboard.component').then(mod => mod.UserDashboardComponent)
-  },
-  {
-    path: 'teacherDashboard', loadChildren: () => import('./teacher-dashboard/teacher-dashboard.component').then(mod => mod.TeacherDashboardComponent)
-  }
+  { path: '', component: DashboardComponent },
+  { path:'teacherDashboard',component:TeacherDashboardComponent},
+  { path: 'userDashboard', component: UserDashboardComponent },
 ];
 
 @NgModule({

@@ -29,6 +29,9 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserDashboardComponent } from './dashboard/user-dashboard/user-dashboard.component';
 import { CommonModule } from '@angular/common';
+import { TeacherDashboardComponent } from './dashboard/teacher-dashboard/teacher-dashboard.component';
+
+import {ShortenPipe} from 'src/app/shared/shorten.pipe'
 
 
 @NgModule({
@@ -42,6 +45,9 @@ import { CommonModule } from '@angular/common';
     LogoutComponent,
     DashboardComponent,
     UserDashboardComponent,
+    TeacherDashboardComponent,
+    ShortenPipe
+    
 
 
   ],
